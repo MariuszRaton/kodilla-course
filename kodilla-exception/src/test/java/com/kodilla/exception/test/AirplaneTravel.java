@@ -5,7 +5,7 @@ public class AirplaneTravel {
     public static void main(String[] args)  {
 
         FlightSearch flightSearch = new FlightSearch();
-        Flight flight = new Flight("Pyrzowice");
+        Flight flight = new Flight("Katowice", "Berlin");
 
         try {
             if (flightSearch.findFilght(flight) == false){
