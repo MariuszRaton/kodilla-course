@@ -2,45 +2,31 @@ package com.kodilla.exception.test;
 
 import java.util.*;
 
+
 public class FlightSearch {
+    private final Map<String, List<String>> flightsMap;
 
-    public boolean findFilght(Flight flight){
+    public FlightSearch(Map<String, List<String>> flightsMap) {
+        this.flightsMap = flightsMap;
+    }
 
-        MapOfAirports mapOfAirports = new MapOfAirports();
+    public boolean findFilght(String departureAirport, String arrivalAirport){
 
-        List<String> possibleFlightDirections = new  LinkedList<>();
-
-        String departureAirport = flight.getDepartureAirport();
-        String arrivalAirport = flight.getArrivalAirport();
-
-        for (String i : mapOfAirports.generateMapOfAirports().keySet()) {
-            if (departureAirport == i) {
-                for (String x : mapOfAirports.generateMapOfAirports().get(i)) {
-                    if (x == arrivalAirport) {
-                        System.out.println("Lot możliwy bez przesiadek z lotniska " + i + " na lotnisko " + x);
-                        return true;
-                    } else {
-                        possibleFlightDirections.add(x);
-                    }
-                }
-            }
+        if (!flightsMap.containsKey(departureAirport)){
+            return false;
         }
 
-        if (possibleFlightDirections != null) {
-            for (String i : mapOfAirports.generateMapOfAirports().keySet()) {
-                for (String y : possibleFlightDirections) {
-                    if (i == y ) {
-                        for (String z : mapOfAirports.generateMapOfAirports().get(i)) {
-                            if (z == arrivalAirport) {
-                                System.out.println("Lot z lotniska " + departureAirport +  " na lotnisko " + arrivalAirport + " możliwy z przesiadką na lotnisku " + i);
-                                return true;
-                            }
-                        }
-                    }
-                }
+        if (flightsMap.get(departureAirport).contains(arrivalAirport)){
+            return  true;
+        }
+
+        for (String newdepartureAirport : flightsMap.get(departureAirport)) {
+            if (findFilght(newdepartureAirport, arrivalAirport)) {
+                System.out.println("Przesiadka na lotnisku: " + newdepartureAirport);
+                return true;
             }
         }
-       return false;
+        return false;
     }
 }
 
