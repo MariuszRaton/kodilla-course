@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
-import java.util.List;
+//import javax.transaction.Transactional;
+//import java.util.List;
 import java.util.Optional;
 
 //@Transactional
@@ -40,7 +40,7 @@ public class TaskDaoTestSuite {
         //CleanUp
         taskDao.deleteById(id);
     }
-
+/*
     @Test
     public void testTaskDaoFindByDuration() {
         //Given
@@ -58,4 +58,5 @@ public class TaskDaoTestSuite {
         int id = readTasks.get(0).getId();
         taskDao.deleteById(id);
     }
+    */
 }
